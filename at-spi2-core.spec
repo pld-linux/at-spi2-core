@@ -1,11 +1,11 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Name:		at-spi2-core
-Version:	1.91.91
+Version:	1.91.92
 Release:	1
 License:	LGPL v2
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/1.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	4fb9c679726746d14cf71d5b4e70b71b
+# Source0-md5:	e7a0fee638614c2ace9c45e16a17cd3b
 URL:		http://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
@@ -94,12 +94,13 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/at-spi-dbus-bus
+%attr(755,root,root) %{_libexecdir}/at-spi-bus-launcher
 %attr(755,root,root) %{_libexecdir}/at-spi2-registryd
 %attr(755,root,root) %{_libdir}/libatspi.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libatspi.so.0
 %{_libdir}/girepository-1.0/Atspi-2.0.typelib
 %{_datadir}/dbus-1/services/org.a11y.atspi.Registry.service
+%{_datadir}/dbus-1/services/org.a11y.Bus.service
 %dir %{_sysconfdir}/at-spi2
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/at-spi2/accessibility.conf
 %{_sysconfdir}/xdg/autostart/at-spi-dbus-bus.desktop
@@ -109,6 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libatspi.so
 %{_includedir}/at-spi-2.0
 %{_datadir}/gir-1.0/Atspi-2.0.gir
+%{_pkgconfigdir}/atspi-2.pc
 
 %files apidocs
 %defattr(644,root,root,755)
