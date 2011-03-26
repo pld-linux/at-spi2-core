@@ -1,11 +1,11 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Name:		at-spi2-core
-Version:	1.91.92
+Version:	1.91.93
 Release:	1
 License:	LGPL v2
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/1.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	e7a0fee638614c2ace9c45e16a17cd3b
+# Source0-md5:	efadee156a68ec269779321aceb100a3
 URL:		http://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
