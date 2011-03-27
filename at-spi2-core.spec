@@ -40,6 +40,7 @@ its transport protocol.
 Summary:	Header files for at-spi2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki at-spi2
 Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.26.0
 
 %description devel
