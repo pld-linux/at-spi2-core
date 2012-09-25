@@ -1,0 +1,11 @@
+--- at-spi2-core-2.6.0/atspi/atspi-action.c.old	2012-09-25 13:20:36.333027832 +0200
++++ at-spi2-core-2.6.0/atspi/atspi-action.c	2012-09-25 13:21:26.362756798 +0200
+@@ -89,7 +89,7 @@ atspi_action_get_description (AtspiActio
+  *        keybinding string is the "keyboard shortcut" which invokes the 
+  *        action without posting any menus. 
+  *        Meta-keys are indicated by the conventional strings
+- *        "<Control>", "<Alt>", "<Shift>", "<Mod2>",
++ *        "&lt;Control&gt;", "&lt;Alt&gt;", "&lt;Shift&gt;", "&lt;Mod2&gt;",
+  *        etc. (we use the same string as gtk_accelerator_name() in 
+  *        gtk+-2.X.
+  *
