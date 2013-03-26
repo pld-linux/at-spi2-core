@@ -1,13 +1,12 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.6.3
+Version:	2.8.0
 Release:	1
 License:	LGPL v2+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.6/%{name}-%{version}.tar.xz
-# Source0-md5:	eb1d3ca3332af8862791d3ff7dcfd20a
-Patch0:		%{name}-doc-build-fix.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.8/%{name}-%{version}.tar.xz
+# Source0-md5:	93b57d5d56d15d1222ddf2386e2f869f
 URL:		http://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
@@ -94,7 +93,6 @@ Dokumentacja API biblioteki at-spi2.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__intltoolize}
@@ -127,7 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS NEWS README
 %attr(755,root,root) %{_libexecdir}/at-spi-bus-launcher
 %attr(755,root,root) %{_libexecdir}/at-spi2-registryd
 %{_datadir}/dbus-1/services/org.a11y.atspi.Registry.service
