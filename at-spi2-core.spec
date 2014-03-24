@@ -1,18 +1,18 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.10.2
+Version:	2.12.0
 Release:	1
 License:	LGPL v2+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.10/%{name}-%{version}.tar.xz
-# Source0-md5:	d4a198201f6189fb248f3edd19efe39c
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.12/%{name}-%{version}.tar.xz
+# Source0-md5:	b12ad0e0924706f5e7f51216241068ef
 URL:		https://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-devel >= 1.0
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.28.0
+BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	intltool >= 0.40.0
@@ -55,7 +55,7 @@ Summary:	at-spi2 core library
 Summary(pl.UTF-8):	Główna biblioteka at-spi2
 Group:		Libraries
 Requires:	dbus-libs >= 1.0
-Requires:	glib2 >= 1:2.28.0
+Requires:	glib2 >= 1:2.36.0
 Conflicts:	at-spi2-core < 2.2.1-2
 
 %description libs
@@ -70,7 +70,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki at-spi2
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.0
-Requires:	glib2-devel >= 1:2.28.0
+Requires:	glib2-devel >= 1:2.36.0
 Requires:	xorg-lib-libX11-devel
 
 %description devel
