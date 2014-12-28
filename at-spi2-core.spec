@@ -11,7 +11,7 @@ URL:		https://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-devel >= 1.0
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk-doc >= 1.9
