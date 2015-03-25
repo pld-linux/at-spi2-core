@@ -1,12 +1,12 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.14.1
-Release:	2
+Version:	2.16.0
+Release:	1
 License:	LGPL v2+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.14/%{name}-%{version}.tar.xz
-# Source0-md5:	a37993cc50d90465c9aeed95e2ac439a
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.16/%{name}-%{version}.tar.xz
+# Source0-md5:	be6eeea370f913b7639b609913b2cf02
 URL:		https://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
@@ -128,7 +128,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README
 %attr(755,root,root) %{_libexecdir}/at-spi-bus-launcher
 %attr(755,root,root) %{_libexecdir}/at-spi2-registryd
-%{_datadir}/dbus-1/services/org.a11y.atspi.Registry.service
+%dir %{_datadir}/dbus-1/accessibility-services
+%{_datadir}/dbus-1/accessibility-services/org.a11y.atspi.Registry.service
 %{_datadir}/dbus-1/services/org.a11y.Bus.service
 %dir %{_sysconfdir}/at-spi2
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/at-spi2/accessibility.conf
