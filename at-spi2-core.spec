@@ -2,7 +2,7 @@ Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
 Version:	2.18.3
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Daemons
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.18/%{name}-%{version}.tar.xz
@@ -84,6 +84,9 @@ Summary:	at-spi2 library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki at-spi2
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 at-spi2 library API documentation.
