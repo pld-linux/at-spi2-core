@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	xevie	# XEViE support (deprecated?)
+
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
@@ -20,8 +24,8 @@ BuildRequires:	libtool >= 2:2.0
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	xorg-lib-libXevie-devel
-BuildRequires:	xorg-lib-libXext-devel
+%{?with_xevie:BuildRequires:	xorg-lib-libXevie-devel}
+%{?with_xevie:BuildRequires:	xorg-lib-libXext-devel}
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xz
@@ -107,6 +111,7 @@ Dokumentacja API biblioteki at-spi2.
 %configure \
 	--disable-silent-rules \
 	--enable-gtk-doc \
+	%{?with_xevie:--enable-xevie} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
