@@ -5,21 +5,20 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.24.1
+Version:	2.26.0
 Release:	1
 License:	LGPL v2+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.24/%{name}-%{version}.tar.xz
-# Source0-md5:	61d0a471e693292934a73f288ebff35c
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.26/%{name}-%{version}.tar.xz
+# Source0-md5:	ef3de25da46da8f650915205eb7e1a33
 URL:		https://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1:1.9
+BuildRequires:	automake >= 1:1.13
 BuildRequires:	dbus-devel >= 1.0
-BuildRequires:	gettext-tools
+BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.36.0
-BuildRequires:	gobject-introspection-devel >= 0.10.0
-BuildRequires:	gtk-doc >= 1.9
-BuildRequires:	intltool >= 0.40.0
+BuildRequires:	gobject-introspection-devel >= 1.32.0
+BuildRequires:	gtk-doc >= 1.25
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
@@ -102,7 +101,6 @@ Dokumentacja API biblioteki at-spi2.
 %setup -q
 
 %build
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
