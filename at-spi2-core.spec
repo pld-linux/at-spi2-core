@@ -5,21 +5,19 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.26.2
+Version:	2.28.0
 Release:	1
 License:	LGPL v2+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.26/%{name}-%{version}.tar.xz
-# Source0-md5:	4a042e4c801fdb793788b749eab21485
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.28/%{name}-%{version}.tar.xz
+# Source0-md5:	9c42f79636ed1c0e908b7483d789b32e
 URL:		https://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
-BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1:1.13
 BuildRequires:	dbus-devel >= 1.0
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 1.32.0
 BuildRequires:	gtk-doc >= 1.25
-BuildRequires:	libtool >= 2:2.0
+BuildRequires:	meson >= 0.40.1
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
@@ -101,25 +99,15 @@ Dokumentacja API biblioteki at-spi2.
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--disable-silent-rules \
-	--enable-gtk-doc \
-	%{?with_xevie:--enable-xevie} \
-	--with-html-dir=%{_gtkdocdir}
-%{__make}
+%meson build \
+	-Denable_docs=true \
+	-Denable-x11=yes
+%meson_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+%meson_install -C build
 
 %find_lang %{name}
 
