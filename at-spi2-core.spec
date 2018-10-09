@@ -1,18 +1,18 @@
 #
 # Conditional build:
-%bcond_with	xevie	# XEViE support (deprecated?)
+%bcond_with	static_libs	# static library
 
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.28.0
+Version:	2.30.0
 Release:	1
 License:	LGPL v2+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.28/%{name}-%{version}.tar.xz
-# Source0-md5:	9c42f79636ed1c0e908b7483d789b32e
-URL:		https://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
-BuildRequires:	dbus-devel >= 1.0
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.30/%{name}-%{version}.tar.xz
+# Source0-md5:	d4f22c66b3210ffe6b10d01c04e008b5
+URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
+BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 1.32.0
@@ -21,13 +21,11 @@ BuildRequires:	meson >= 0.40.1
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
-%{?with_xevie:BuildRequires:	xorg-lib-libXevie-devel}
-%{?with_xevie:BuildRequires:	xorg-lib-libXext-devel}
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xz
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	dbus >= 1.0
+Requires:	dbus >= 1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,7 +53,7 @@ zamiast wcześniejszego ORBIT/CORBA.
 Summary:	at-spi2 core library
 Summary(pl.UTF-8):	Główna biblioteka at-spi2
 Group:		Libraries
-Requires:	dbus-libs >= 1.0
+Requires:	dbus-libs >= 1.5
 Requires:	glib2 >= 1:2.36.0
 Conflicts:	at-spi2-core < 2.2.1-2
 
@@ -70,7 +68,7 @@ Summary:	Header files for at-spi2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki at-spi2
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	dbus-devel >= 1.0
+Requires:	dbus-devel >= 1.5
 Requires:	glib2-devel >= 1:2.36.0
 Requires:	xorg-lib-libX11-devel
 
@@ -79,6 +77,18 @@ Header files for at-spi2 library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki at-spi2.
+
+%package static
+Summary:	Static at-spi2 library
+Summary(pl.UTF-8):	Statyczna biblioteka at-spi2
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static at-spi2 library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka at-spi2.
 
 %package apidocs
 Summary:	at-spi2 library API documentation
@@ -100,8 +110,10 @@ Dokumentacja API biblioteki at-spi2.
 
 %build
 %meson build \
+	%{!?with_static_libs:--default-library='shared'} \
 	-Denable_docs=true \
 	-Denable-x11=yes
+
 %meson_build -C build
 
 %install
@@ -142,6 +154,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/at-spi-2.0
 %{_datadir}/gir-1.0/Atspi-2.0.gir
 %{_pkgconfigdir}/atspi-2.pc
+
+%if %{with static_libs}
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libatspi.so.a
+%endif
 
 %files apidocs
 %defattr(644,root,root,755)
