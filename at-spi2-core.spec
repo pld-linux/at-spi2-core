@@ -5,20 +5,22 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.32.1
+Version:	2.34.0
 Release:	1
 License:	LGPL v2+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.32/%{name}-%{version}.tar.xz
-# Source0-md5:	998fd9d858f8fa22c4c8c15567bf6254
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.34/%{name}-%{version}.tar.xz
+# Source0-md5:	53c21565507105fb68031cd9c21a559b
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 1.32.0
 BuildRequires:	gtk-doc >= 1.25
-BuildRequires:	meson >= 0.40.1
+BuildRequires:	meson >= 0.50.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXi-devel
@@ -114,12 +116,12 @@ Dokumentacja API biblioteki at-spi2.
 	-Ddocs=true \
 	-Dx11=yes
 
-%meson_build -C build
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%meson_install -C build
+%ninja_install -C build
 
 %find_lang %{name}
 
