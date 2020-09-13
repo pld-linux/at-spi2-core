@@ -1,22 +1,23 @@
 #
 # Conditional build:
+%bcond_without	apidocs		# API documentation
 %bcond_with	static_libs	# static library
 
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.36.1
+Version:	2.38.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.36/%{name}-%{version}.tar.xz
-# Source0-md5:	d01e5326b4eb15ac3c27eed73ecf26f1
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.38/%{name}-%{version}.tar.xz
+# Source0-md5:	ae060dc0a042822b3f07c786c5d5aab7
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 1.32.0
-BuildRequires:	gtk-doc >= 1.25
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.25}
 BuildRequires:	meson >= 0.50.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
@@ -97,7 +98,7 @@ Summary:	at-spi2 library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki at-spi2
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -113,7 +114,7 @@ Dokumentacja API biblioteki at-spi2.
 %build
 %meson build \
 	%{!?with_static_libs:--default-library='shared'} \
-	-Ddocs=true \
+	%{?with_apidocs:-Ddocs=true} \
 	-Dx11=yes
 
 %ninja_build -C build
@@ -160,9 +161,11 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libatspi.so.a
+%{_libdir}/libatspi.a
 %endif
 
+%if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/libatspi
+%endif
