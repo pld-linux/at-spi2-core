@@ -98,9 +98,7 @@ Summary:	at-spi2 library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki at-spi2
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 at-spi2 library API documentation.
