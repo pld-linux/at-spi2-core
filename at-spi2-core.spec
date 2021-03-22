@@ -6,21 +6,22 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.38.0
+Version:	2.40.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/at-spi2-core/2.38/%{name}-%{version}.tar.xz
-# Source0-md5:	ae060dc0a042822b3f07c786c5d5aab7
+Source0:	https://download.gnome.org/sources/at-spi2-core/2.40/%{name}-%{version}.tar.xz
+# Source0-md5:	ebb6c1c95346634809197fc2ba175476
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
-BuildRequires:	glib2-devel >= 1:2.36.0
+BuildRequires:	glib2-devel >= 1:2.62.0
 BuildRequires:	gobject-introspection-devel >= 1.32.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.25}
 BuildRequires:	meson >= 0.50.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
@@ -57,7 +58,7 @@ Summary:	at-spi2 core library
 Summary(pl.UTF-8):	Główna biblioteka at-spi2
 Group:		Libraries
 Requires:	dbus-libs >= 1.5
-Requires:	glib2 >= 1:2.36.0
+Requires:	glib2 >= 1:2.62.0
 Conflicts:	at-spi2-core < 2.2.1-2
 
 %description libs
@@ -72,7 +73,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki at-spi2
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.5
-Requires:	glib2-devel >= 1:2.36.0
+Requires:	glib2-devel >= 1:2.62.0
 Requires:	xorg-lib-libX11-devel
 
 %description devel
