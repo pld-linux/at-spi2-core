@@ -6,12 +6,12 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.40.3
+Version:	2.42.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	https://download.gnome.org/sources/at-spi2-core/2.40/%{name}-%{version}.tar.xz
-# Source0-md5:	db4f7caceb5d663ec3adb715408b2303
+Source0:	https://download.gnome.org/sources/at-spi2-core/2.42/%{name}-%{version}.tar.xz
+# Source0-md5:	ce5e462a76e7480bd27e55828696eea4
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
@@ -141,6 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.a11y.Bus.service
 %dir %{_datadir}/defaults/at-spi2
 %{_datadir}/defaults/at-spi2/accessibility.conf
+%{_sysconfdir}/xdg/Xwayland-session.d/00-at-spi
 %{_sysconfdir}/xdg/autostart/at-spi-dbus-bus.desktop
 %{systemduserunitdir}/at-spi-dbus-bus.service
 
