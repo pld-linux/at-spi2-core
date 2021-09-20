@@ -123,6 +123,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ab
+
 %find_lang %{name}
 
 %clean
