@@ -7,7 +7,7 @@ Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
 Version:	2.42.0
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		Daemons
 Source0:	https://download.gnome.org/sources/at-spi2-core/2.42/%{name}-%{version}.tar.xz
@@ -22,14 +22,16 @@ BuildRequires:	meson >= 0.50.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.011
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xz
+Requires(post,preun):	systemd-units >= 250.1
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus >= 1.5
+Requires:	systemd-units >= 250.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -129,6 +131,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%systemd_user_post at-spi-dbus-bus.service
+
+%preun
+%systemd_user_preun at-spi-dbus-bus.service
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
