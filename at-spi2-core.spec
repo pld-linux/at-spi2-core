@@ -6,19 +6,20 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.44.1
+Version:	2.46.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	https://download.gnome.org/sources/at-spi2-core/2.44/%{name}-%{version}.tar.xz
-# Source0-md5:	7e30e7c82879ef13a76891dccee723cb
+Source0:	https://download.gnome.org/sources/at-spi2-core/2.46/%{name}-%{version}.tar.xz
+# Source0-md5:	16e85a40442d80be960b4e1e3992fd5b
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
-BuildRequires:	glib2-devel >= 1:2.62.0
+BuildRequires:	glib2-devel >= 1:2.67.4
 BuildRequires:	gobject-introspection-devel >= 1.32.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.25}
-BuildRequires:	meson >= 0.50.0
+BuildRequires:	libxml2-devel >= 1:2.9.1
+BuildRequires:	meson >= 0.56.2
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
@@ -60,7 +61,7 @@ Summary:	at-spi2 core library
 Summary(pl.UTF-8):	Główna biblioteka at-spi2
 Group:		Libraries
 Requires:	dbus-libs >= 1.5
-Requires:	glib2 >= 1:2.62.0
+Requires:	glib2 >= 1:2.67.4
 Conflicts:	at-spi2-core < 2.2.1-2
 
 %description libs
@@ -75,7 +76,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki at-spi2
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus-devel >= 1.5
-Requires:	glib2-devel >= 1:2.62.0
+Requires:	glib2-devel >= 1:2.67.4
 Requires:	xorg-lib-libX11-devel
 
 %description devel
@@ -109,6 +110,147 @@ at-spi2 library API documentation.
 %description apidocs -l pl.UTF-8
 Dokumentacja API biblioteki at-spi2.
 
+%package -n at-spi2-atk
+Summary:	A GTK+ module that bridges ATK to D-Bus at-spi
+Summary(pl.UTF-8):	Moduł GTK+ łączący ATK z at-spi jako usługą D-Bus
+Group:		Libraries
+Requires:	at-spi2-atk-libs = %{version}-%{release}
+Requires:	atk = 1:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
+Requires:	dbus >= 1.5
+
+%description -n at-spi2-atk
+This package provides a GTK+ module that bridges ATK to the new D-Bus
+based at-spi.
+
+%description -n at-spi2-atk -l pl.UTF-8
+Ten pakiet dostarcza moduł GTK+ łączący ATK z nowym at-spi, opartym o
+usługę D-Bus.
+
+%package -n at-spi2-atk-libs
+Summary:	Shared atk-bridge library
+Summary(pl.UTF-8):	Biblioteka współdzielona atk-bridge
+Group:		Libraries
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	atk = 1:%{version}-%{release}
+Requires:	dbus-libs >= 1.5
+Requires:	glib2 >= 1:2.32.0
+Conflicts:	at-spi2-atk < 2.6.0-2
+
+%description -n at-spi2-atk-libs
+Shared atk-bridge library, providing ATK/D-Bus bridge.
+
+%description -n at-spi2-atk-libs -l pl.UTF-8
+Biblioteka współdzielona atk-bridge, zapewniająca pomost między ATK a
+D-Bus.
+
+%package -n at-spi2-atk-devel
+Summary:	Header files for atk-bridge library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki atk-bridge
+Group:		Development/Libraries
+Requires:	at-spi2-atk-libs = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	glib2-devel >= 1:2.32.0
+
+%description -n at-spi2-atk-devel
+Header files for atk-bridge library.
+
+%description -n at-spi2-atk-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki atk-bridge.
+
+%package -n at-spi2-atk-static
+Summary:	Static atk-bridge library
+Summary(pl.UTF-8):	Biblioteka statyczna atk-bridge
+Group:		Development/Libraries
+Requires:	at-spi2-atk-devel = %{version}-%{release}
+
+%description -n at-spi2-atk-static
+Static atk-bridge library.
+
+%description -n at-spi2-atk-static -l pl.UTF-8
+Biblioteka statyczna atk-bridge.
+
+%package -n atk
+Summary:	ATK - Accessibility Toolkit
+Summary(pl.UTF-8):	ATK - biblioteka ułatwiająca niepełnosprawnym korzystanie z komputerów
+Summary(pt_BR.UTF-8):	Interfaces para suporte a acessibilidade
+Epoch:		1
+Group:		Libraries
+Requires:	glib2 >= 1:2.38.0
+Obsoletes:	libatk1.0_0 < 1:2
+
+%description -n atk
+The ATK library provides a set of interfaces for adding accessibility
+support to applications and graphical user interface toolkits. By
+supporting the ATK interfaces, an application or toolkit can be used
+as tools such as screen readers and magnifiers, and alternative input
+devices.
+
+%description -n atk -l pl.UTF-8
+Biblioteka ATK udostępnia zestaw interfejsów ułatwiających
+niepełnosprawnym korzystanie z aplikacji i poszczególnych elementów
+graficznego interfejsu użytkownika. Poprzez wykorzystanie interfejsów
+ATK, aplikacja lub element interfejsu może być używany z takimi
+narzędziami jak czytniki ekranu i narzędzia powiększające oraz
+alternatywnymi urządzeniami wejściowymi.
+
+%description -n atk -l pt_BR.UTF-8
+A biblioteca ATK provê um conjunto de interfaces para adicionar
+suporte a acessibilidade para aplicações e interfaces gráficas.
+Suportando a interface ATK, uma aplicação ou interface gráfica pode
+ser utilizada como ferramentas de leitura e aumento de tela,
+dispositivos de entrada alternativos, etc.
+
+%package -n atk-devel
+Summary:	ATK - header files
+Summary(pl.UTF-8):	ATK - pliki nagłówkowe
+Summary(pt_BR.UTF-8):	Interfaces para suporte a acessibilidade
+Epoch:		1
+Group:		X11/Development/Libraries
+Requires:	atk = 1:%{version}-%{release}
+Requires:	glib2-devel >= 1:2.38.0
+Obsoletes:	libatk1.0_0-devel < 1:2
+
+%description -n atk-devel
+ATK - header files.
+
+%description -n atk-devel -l pl.UTF-8
+ATK - pliki nagłówkowe.
+
+%description -n atk-devel -l pt_BR.UTF-8
+Interfaces para suporte a acessibilidade.
+
+%package -n atk-static
+Summary:	ATK static library
+Summary(pl.UTF-8):	Biblioteka statyczna ATK
+Summary(pt_BR.UTF-8):	Interfaces para suporte a acessibilidade
+Epoch:		1
+Group:		X11/Development/Libraries
+Requires:	atk-devel = 1:%{version}-%{release}
+
+%description -n atk-static
+ATK static library.
+
+%description -n atk-static -l pl.UTF-8
+Biblioteka statyczna ATK.
+
+%description -n atk-static -l pt_BR.UTF-8
+Interfaces para suporte a acessibilidade.
+
+%package -n atk-apidocs
+Summary:	ATK API documentation
+Summary(pl.UTF-8):	Dokumentacja API ATK
+Epoch:		1
+Group:		Documentation
+Requires:	gtk-doc-common
+BuildArch:	noarch
+
+%description -n atk-apidocs
+ATK API documentation.
+
+%description -n atk-apidocs -l pl.UTF-8
+Dokumentacja API ATK.
+
 %prep
 %setup -q
 
@@ -139,9 +281,15 @@ rm -rf $RPM_BUILD_ROOT
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
+%post	-n at-spi2-atk-libs -p /sbin/ldconfig
+%postun	-n at-spi2-atk-libs -p /sbin/ldconfig
+
+%post	-n atk -p /sbin/ldconfig
+%postun	-n atk -p /sbin/ldconfig
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README.md
+%doc MAINTAINERS NEWS README.md
 %attr(755,root,root) %{_libexecdir}/at-spi-bus-launcher
 %attr(755,root,root) %{_libexecdir}/at-spi2-registryd
 %dir %{_datadir}/dbus-1/accessibility-services
@@ -176,4 +324,50 @@ rm -rf $RPM_BUILD_ROOT
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/libatspi
+%endif
+
+%files -n at-spi2-atk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/gtk-2.0/modules/libatk-bridge.so
+%{_libdir}/gnome-settings-daemon-3.0/gtk-modules/at-spi2-atk.desktop
+
+%files -n at-spi2-atk-libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libatk-bridge-2.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libatk-bridge-2.0.so.0
+
+%files -n at-spi2-atk-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libatk-bridge-2.0.so
+%{_includedir}/at-spi2-atk
+%{_pkgconfigdir}/atk-bridge-2.0.pc
+
+%if %{with static_libs}
+%files -n at-spi2-atk-static
+%defattr(644,root,root,755)
+%{_libdir}/libatk-bridge-2.0.a
+%endif
+
+%files -n atk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libatk-1.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libatk-1.0.so.0
+%{_libdir}/girepository-1.0/Atk-1.0.typelib
+
+%files -n atk-devel
+%attr(755,root,root) %{_libdir}/libatk-1.0.so
+%{_includedir}/atk-1.0
+%{_pkgconfigdir}/atk.pc
+%{_datadir}/gir-1.0/Atk-1.0.gir
+
+%if %{with static_libs}
+%files -n atk-static
+%defattr(644,root,root,755)
+%{_libdir}/libatk-1.0.a
+%endif
+
+%if %{with apidocs}
+%files -n atk-apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/atk
 %endif
