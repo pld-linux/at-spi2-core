@@ -6,20 +6,20 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.46.0
-Release:	2
+Version:	2.48.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	https://download.gnome.org/sources/at-spi2-core/2.46/%{name}-%{version}.tar.xz
-# Source0-md5:	16e85a40442d80be960b4e1e3992fd5b
+Source0:	https://download.gnome.org/sources/at-spi2-core/2.48/%{name}-%{version}.tar.xz
+# Source0-md5:	69e96032f071371b29b32c804f8b97d3
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.67.4
 BuildRequires:	gobject-introspection-devel >= 1.32.0
-%{?with_apidocs:BuildRequires:	gtk-doc >= 1.25}
+%{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
 BuildRequires:	libxml2-devel >= 1:2.9.1
-BuildRequires:	meson >= 0.56.2
+BuildRequires:	meson >= 0.63.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
@@ -258,7 +258,7 @@ Dokumentacja API ATK.
 %meson build \
 	%{!?with_static_libs:--default-library='shared'} \
 	%{?with_apidocs:-Ddocs=true} \
-	-Dx11=yes
+	-Dx11=enabled
 
 %ninja_build -C build
 
@@ -266,6 +266,12 @@ Dokumentacja API ATK.
 rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
+
+%if %{with apidocs}
+# FIXME: where to package gi-docgen generated docs?
+install -d $RPM_BUILD_ROOT%{_gtkdocdir}
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/{atk,libatspi} $RPM_BUILD_ROOT%{_gtkdocdir}
+%endif
 
 %find_lang %{name}
 
