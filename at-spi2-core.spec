@@ -101,7 +101,6 @@ Statyczna biblioteka at-spi2.
 Summary:	at-spi2 library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki at-spi2
 Group:		Documentation
-Requires:	gtk-doc-common
 BuildArch:	noarch
 
 %description apidocs
@@ -242,7 +241,6 @@ Summary:	ATK API documentation
 Summary(pl.UTF-8):	Dokumentacja API ATK
 Epoch:		1
 Group:		Documentation
-Requires:	gtk-doc-common
 BuildArch:	noarch
 
 %description -n atk-apidocs
