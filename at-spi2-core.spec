@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_without	apidocs		# API documentation
 %bcond_without	static_libs	# static library
+%bcond_without	systemd		# systemd
 
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
@@ -256,8 +257,13 @@ Dokumentacja API ATK.
 %meson build \
 	%{!?with_static_libs:--default-library='shared'} \
 	-Ddbus_daemon=/usr/bin/dbus-daemon \
+%if %{with systemd}
 	-Ddbus_broker=/usr/bin/dbus-broker-launch \
 	-Ddefault_bus=dbus-broker \
+%else
+	-Ddefault_bus=dbus-daemon \
+	-Duse_systemd=false \
+%endif
 	%{?with_apidocs:-Ddocs=true} \
 	-Dx11=enabled
 
