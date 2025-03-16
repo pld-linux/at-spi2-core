@@ -7,12 +7,12 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.54.1
+Version:	2.56.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	https://download.gnome.org/sources/at-spi2-core/2.54/%{name}-%{version}.tar.xz
-# Source0-md5:	a05ad6cf4a49b19964cc5eec363d2310
+Source0:	https://download.gnome.org/sources/at-spi2-core/2.56/%{name}-%{version}.tar.xz
+# Source0-md5:	064139d18c59b5e792302784593f9f17
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
@@ -265,6 +265,7 @@ Dokumentacja API ATK.
 	-Duse_systemd=false \
 %endif
 	%{?with_apidocs:-Ddocs=true} \
+	-Dintrospection=enabled \
 	-Dx11=enabled
 
 %meson_build
