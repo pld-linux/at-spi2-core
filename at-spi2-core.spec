@@ -7,12 +7,12 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.56.2
+Version:	2.56.3
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
 Source0:	https://download.gnome.org/sources/at-spi2-core/2.56/%{name}-%{version}.tar.xz
-# Source0-md5:	3ef1456569fe0824142d5f6fe82ae941
+# Source0-md5:	a3df7c402d71bb585dd080bf31f74484
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
