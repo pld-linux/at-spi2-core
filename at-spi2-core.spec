@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# API documentation
-%bcond_without	static_libs	# static library
-%bcond_without	systemd		# systemd
+%bcond_without	static_libs	# static libraries
+%bcond_without	systemd		# systemd support
 
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.56.4
+Version:	2.58.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	https://download.gnome.org/sources/at-spi2-core/2.56/%{name}-%{version}.tar.xz
-# Source0-md5:	1bdef0e54532c4f3f004d7e2d40e256a
+Source0:	https://download.gnome.org/sources/at-spi2-core/2.58/%{name}-%{version}.tar.xz
+# Source0-md5:	89f67c8e572a1dbea8f61c6e2ca8d4a7
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
@@ -20,9 +20,10 @@ BuildRequires:	glib2-devel >= 1:2.67.4
 BuildRequires:	gobject-introspection-devel >= 1.32.0
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
 BuildRequires:	libxml2-devel >= 1:2.9.1
-BuildRequires:	meson >= 0.63.0
+BuildRequires:	meson >= 0.64.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
+BuildRequires:	python3 >= 1:3.2
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
@@ -109,6 +110,19 @@ at-spi2 library API documentation.
 
 %description apidocs -l pl.UTF-8
 Dokumentacja API biblioteki at-spi2.
+
+%package -n python3-atspi
+Summary:	Python GI bindings for AT-SPI library
+Summary(pl.UTF-8):	Wiązania GI Pythona do biblioteki AT-SPI
+Group:		Development/Libraries
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	python3-pygobject3 >= 3.0
+
+%description -n python3-atspi
+Python GI bindings for AT-SPI library.
+
+%description -n python3-atspi -l pl.UTF-8
+Wiązania GI Pythona do biblioteki AT-SPI.
 
 %package -n at-spi2-atk
 Summary:	A GTK+ module that bridges ATK to D-Bus at-spi
@@ -266,6 +280,7 @@ Dokumentacja API ATK.
 %endif
 	%{?with_apidocs:-Ddocs=true} \
 	-Dintrospection=enabled \
+	-Dpython=%{__python3} \
 	-Dx11=enabled
 
 %meson_build
@@ -332,6 +347,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libatspi.a
 %endif
+
+%files -n python3-atspi
+%defattr(644,root,root,755)
+%{py3_sitedir}/gi/overrides/Atspi.py
+%{py3_sitedir}/gi/overrides/__pycache__/Atspi.cpython-*.py[co]
 
 %if %{with apidocs}
 %files apidocs
