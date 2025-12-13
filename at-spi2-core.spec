@@ -301,10 +301,10 @@ install -d $RPM_BUILD_ROOT%{_gidocdir}
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%systemd_user_post at-spi-dbus-bus.service
+%{?with_systemd:%systemd_user_post at-spi-dbus-bus.service}
 
 %preun
-%systemd_user_preun at-spi-dbus-bus.service
+%{?with_systemd:%systemd_user_preun at-spi-dbus-bus.service}
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
@@ -327,7 +327,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/defaults/at-spi2/accessibility.conf
 %{_sysconfdir}/xdg/Xwayland-session.d/00-at-spi
 %{_sysconfdir}/xdg/autostart/at-spi-dbus-bus.desktop
-%{systemduserunitdir}/at-spi-dbus-bus.service
+%{?with_systemd:%{systemduserunitdir}/at-spi-dbus-bus.service}
 
 %files libs
 %defattr(644,root,root,755)
