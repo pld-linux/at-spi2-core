@@ -7,12 +7,12 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.58.3
+Version:	2.60.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	https://download.gnome.org/sources/at-spi2-core/2.58/%{name}-%{version}.tar.xz
-# Source0-md5:	c47de3dd660898276f1098ad1fee1bd2
+Source0:	https://download.gnome.org/sources/at-spi2-core/2.60/%{name}-%{version}.tar.xz
+# Source0-md5:	34db81f507a598579c8239f39e6ce736
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
 BuildRequires:	gettext-tools >= 0.19.8
@@ -331,7 +331,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libatspi.so.*.*.*
+%{_libdir}/libatspi.so.*.*.*
 %ghost %{_libdir}/libatspi.so.0
 %{_libdir}/girepository-1.0/Atspi-2.0.typelib
 
@@ -361,12 +361,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n at-spi2-atk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/gtk-2.0/modules/libatk-bridge.so
+%{_libdir}/gtk-2.0/modules/libatk-bridge.so
 %{_libdir}/gnome-settings-daemon-3.0/gtk-modules/at-spi2-atk.desktop
 
 %files -n at-spi2-atk-libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libatk-bridge-2.0.so.*.*.*
+%{_libdir}/libatk-bridge-2.0.so.*.*.*
 %ghost %{_libdir}/libatk-bridge-2.0.so.0
 
 %files -n at-spi2-atk-devel
@@ -383,7 +383,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n atk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libatk-1.0.so.*.*.*
+%{_libdir}/libatk-1.0.so.*.*.*
 %ghost %{_libdir}/libatk-1.0.so.0
 %{_libdir}/girepository-1.0/Atk-1.0.typelib
 
