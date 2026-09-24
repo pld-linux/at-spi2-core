@@ -32,7 +32,7 @@ BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xz
 Requires(post,preun):	systemd-units >= 1:250.1
-Requires:	%{name}-libs = %{version}-%{release}
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 Requires:	dbus >= 1.5
 Requires:	systemd-units >= 1:250.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,8 +62,8 @@ zamiast wcześniejszego ORBIT/CORBA.
 Summary:	at-spi2 core library
 Summary(pl.UTF-8):	Główna biblioteka at-spi2
 Group:		Libraries
-Requires:	dbus-libs >= 1.5
-Requires:	glib2 >= 1:2.67.4
+Requires:	dbus-libs%{?_isa} >= 1.5
+Requires:	glib2%{?_isa} >= 1:2.67.4
 Conflicts:	at-spi2-core < 2.2.1-2
 
 %description libs
@@ -76,10 +76,10 @@ Główna biblioteka at-spi2.
 Summary:	Header files for at-spi2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki at-spi2
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{version}-%{release}
-Requires:	dbus-devel >= 1.5
-Requires:	glib2-devel >= 1:2.67.4
-Requires:	xorg-lib-libX11-devel
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
+Requires:	dbus-devel%{?_isa} >= 1.5
+Requires:	glib2-devel%{?_isa} >= 1:2.67.4
+Requires:	xorg-lib-libX11-devel%{?_isa}
 
 %description devel
 Header files for at-spi2 library.
@@ -91,7 +91,7 @@ Pliki nagłówkowe biblioteki at-spi2.
 Summary:	Static at-spi2 library
 Summary(pl.UTF-8):	Statyczna biblioteka at-spi2
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
 Static at-spi2 library.
@@ -115,8 +115,8 @@ Dokumentacja API biblioteki at-spi2.
 Summary:	Python GI bindings for AT-SPI library
 Summary(pl.UTF-8):	Wiązania GI Pythona do biblioteki AT-SPI
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{version}-%{release}
-Requires:	python3-pygobject3 >= 3.0
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
+Requires:	python3-pygobject3%{?_isa} >= 3.0
 
 %description -n python3-atspi
 Python GI bindings for AT-SPI library.
@@ -128,9 +128,9 @@ Wiązania GI Pythona do biblioteki AT-SPI.
 Summary:	A GTK+ module that bridges ATK to D-Bus at-spi
 Summary(pl.UTF-8):	Moduł GTK+ łączący ATK z at-spi jako usługą D-Bus
 Group:		Libraries
-Requires:	at-spi2-atk-libs = %{version}-%{release}
-Requires:	atk = 1:%{version}-%{release}
-Requires:	%{name} = %{version}-%{release}
+Requires:	at-spi2-atk-libs%{?_isa} = %{version}-%{release}
+Requires:	atk%{?_isa} = 1:%{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	dbus >= 1.5
 
 %description -n at-spi2-atk
@@ -145,10 +145,10 @@ usługę D-Bus.
 Summary:	Shared atk-bridge library
 Summary(pl.UTF-8):	Biblioteka współdzielona atk-bridge
 Group:		Libraries
-Requires:	%{name}-libs = %{version}-%{release}
-Requires:	atk = 1:%{version}-%{release}
-Requires:	dbus-libs >= 1.5
-Requires:	glib2 >= 1:2.32.0
+Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
+Requires:	atk%{?_isa} = 1:%{version}-%{release}
+Requires:	dbus-libs%{?_isa} >= 1.5
+Requires:	glib2%{?_isa} >= 1:2.32.0
 Conflicts:	at-spi2-atk < 2.6.0-2
 
 %description -n at-spi2-atk-libs
@@ -162,9 +162,9 @@ D-Bus.
 Summary:	Header files for atk-bridge library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki atk-bridge
 Group:		Development/Libraries
-Requires:	at-spi2-atk-libs = %{version}-%{release}
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.32.0
+Requires:	at-spi2-atk-libs%{?_isa} = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
+Requires:	glib2-devel%{?_isa} >= 1:2.32.0
 
 %description -n at-spi2-atk-devel
 Header files for atk-bridge library.
@@ -176,7 +176,7 @@ Pliki nagłówkowe biblioteki atk-bridge.
 Summary:	Static atk-bridge library
 Summary(pl.UTF-8):	Biblioteka statyczna atk-bridge
 Group:		Development/Libraries
-Requires:	at-spi2-atk-devel = %{version}-%{release}
+Requires:	at-spi2-atk-devel%{?_isa} = %{version}-%{release}
 
 %description -n at-spi2-atk-static
 Static atk-bridge library.
@@ -190,7 +190,7 @@ Summary(pl.UTF-8):	ATK - biblioteka ułatwiająca niepełnosprawnym korzystanie 
 Summary(pt_BR.UTF-8):	Interfaces para suporte a acessibilidade
 Epoch:		1
 Group:		Libraries
-Requires:	glib2 >= 1:2.38.0
+Requires:	glib2%{?_isa} >= 1:2.38.0
 Obsoletes:	libatk1.0_0 < 1:2
 
 %description -n atk
@@ -221,8 +221,8 @@ Summary(pl.UTF-8):	ATK - pliki nagłówkowe
 Summary(pt_BR.UTF-8):	Interfaces para suporte a acessibilidade
 Epoch:		1
 Group:		X11/Development/Libraries
-Requires:	atk = 1:%{version}-%{release}
-Requires:	glib2-devel >= 1:2.38.0
+Requires:	atk%{?_isa} = 1:%{version}-%{release}
+Requires:	glib2-devel%{?_isa} >= 1:2.38.0
 Obsoletes:	libatk1.0_0-devel < 1:2
 
 %description -n atk-devel
@@ -240,7 +240,7 @@ Summary(pl.UTF-8):	Biblioteka statyczna ATK
 Summary(pt_BR.UTF-8):	Interfaces para suporte a acessibilidade
 Epoch:		1
 Group:		X11/Development/Libraries
-Requires:	atk-devel = 1:%{version}-%{release}
+Requires:	atk-devel%{?_isa} = 1:%{version}-%{release}
 
 %description -n atk-static
 ATK static library.
