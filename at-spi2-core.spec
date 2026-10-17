@@ -7,14 +7,15 @@
 Summary:	Protocol definitions and daemon for D-Bus at-spi
 Summary(pl-UTF-8):	Definicje protokołu oraz demon at-spi dla usługi D-Bus
 Name:		at-spi2-core
-Version:	2.60.7
+Version:	2.62.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Daemons
-Source0:	https://download.gnome.org/sources/at-spi2-core/2.60/%{name}-%{version}.tar.xz
-# Source0-md5:	1d10fd9dead0ba7005a8973df6ee07f6
+Source0:	https://download.gnome.org/sources/at-spi2-core/2.62/%{name}-%{version}.tar.xz
+# Source0-md5:	81de6d627d3728810a57e4ea92203cc1
 URL:		https://wiki.linuxfoundation.org/accessibility/d-bus
 BuildRequires:	dbus-devel >= 1.5
+BuildRequires:	gcc >= 5:3.2
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.67.4
 BuildRequires:	gobject-introspection-devel >= 1.32.0
@@ -300,11 +301,13 @@ install -d $RPM_BUILD_ROOT%{_gidocdir}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with systemd}
 %post
-%{?with_systemd:%systemd_user_post at-spi-dbus-bus.service}
+%systemd_user_post at-spi-dbus-bus.service
 
 %preun
-%{?with_systemd:%systemd_user_preun at-spi-dbus-bus.service}
+%systemd_user_preun at-spi-dbus-bus.service
+%endif
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
@@ -327,7 +330,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/defaults/at-spi2/accessibility.conf
 %{_sysconfdir}/xdg/Xwayland-session.d/00-at-spi
 %{_sysconfdir}/xdg/autostart/at-spi-dbus-bus.desktop
-%{?with_systemd:%{systemduserunitdir}/at-spi-dbus-bus.service}
+%if %{with systemd}
+%{systemduserunitdir}/at-spi-dbus-bus.service
+%endif
 
 %files libs
 %defattr(644,root,root,755)
